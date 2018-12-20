@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 47 47" style="enable-background:new 0 0 47 47;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{enable-background:new    ;}
+</style>
+<g id="Layer_1_1_">
+	<circle class="st0" cx="23.5" cy="23.5" r="23.3"/>
+</g>
+<g id="Layer_2_1_">
+	<path d="M23.5,47C10.6,47,0,36.6,0,23.5C0,10.6,10.6,0,23.5,0C36.6,0,47,10.6,47,23.5C47,36.6,36.6,47,23.5,47z M23.5,0.4
+		C10.6,0.4,0.4,10.6,0.4,23.5s10.4,23.1,23.1,23.1c12.9,0,23.1-10.4,23.1-23.1S36.4,0.4,23.5,0.4z"/>
+</g>
+<g id="Magnetic_Meter_1_">
+	<path d="M41.7,30.4H31.3v-7.1h-7.1v-3.2c4.4-0.3,7.9-4,7.9-8.5c0-4.7-3.8-8.5-8.5-8.5c-4.7,0-8.5,3.8-8.5,8.5c0,4.4,3.4,8,7.7,8.5
+		v3.2h-7v7.1H5.3c-0.4,0-0.7,0.3-0.7,0.7c0,0.4,0.3,0.7,0.7,0.7h10.5v7h15.5v-7h10.4c0.4,0,0.7-0.3,0.7-0.7
+		C42.4,30.7,42,30.4,41.7,30.4z M16.5,11.6c0-3.9,3.2-7.2,7.1-7.2c3.9,0,7.2,3.2,7.2,7.2s-3.2,7.1-7.2,7.1
+		C19.7,18.8,16.5,15.6,16.5,11.6z M29.9,37.4H17.2V24.7h12.7V37.4z"/>
+	<g class="st1">
+		<path d="M27,34.4h-1.7v-4.4l-1.2,2.8H23l-1.2-2.8v4.4h-1.6v-6.5h2l1.5,3.3l1.5-3.3h2V34.4z"/>
+	</g>
+</g>
+</svg>

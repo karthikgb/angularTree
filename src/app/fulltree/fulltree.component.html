@@ -1,0 +1,101 @@
+<form>
+    <input #filter (keyup)="filterNodes(filter.value, tree)" placeholder="filter nodes" />
+</form>
+<div class="treeBody">
+    <tree-root #tree [nodes]="nodes" [options]="customTemplateStringOptions" [focused]="true" (event)="onEvent($event)"
+        (initialized)="onInitialized(tree)">
+        <ng-template #treeNodeFullTemplate let-node let-index="index" let-templates="templates">
+            <div (dragend)="slotOnDrop($event)" [class]="node.getClass()" [class.tree-node]="true"
+                [class.tree-node-expanded]="node.isExpanded && node.hasChildren" [class.tree-node-collapsed]="node.isCollapsed && node.hasChildren"
+                [class.tree-node-leaf]="node.isLeaf" [class.tree-node-active]="node.isActive" [class.tree-node-focused]="node.isFocused">
+
+                <tree-node-drop-slot *ngIf="index === 0" [dropIndex]="node.index" [node]="node.parent">
+                </tree-node-drop-slot>
+                <div class="e-fullrow" (drag)="slotOnDrag($event)" [class.node-content-wrapper-active]="node.isActive"
+                    [class.node-content-wrapper-focused]="node.isFocused" [treeDrag]="node" [treeDragEnabled]="node.allowDrag()"
+                    (click)="node.mouseAction('click', $event)"></div>
+
+                <div (drag)="slotOnDrag($event)" class="node-wrapper" [style.pointer-events]="slotheight == '2px'?'auto':'none'"
+                    [style.padding-left]="node.getNodePadding()" >
+                    <span *ngIf="node.hasChildren" [class.toggle-children-wrapper-expanded]="node.isExpanded"
+                        [class.toggle-children-wrapper-collapsed]="node.isCollapsed" class="toggle-children-wrapper"
+                        (click)="node.mouseAction('expanderClick', $event)">
+                        <span class="toggle-children"></span>
+                    </span>
+                    <span *ngIf="!node.hasChildren" class="toggle-children-placeholder">
+                    </span>
+
+                    <div class="node-content-wrapper"  (click)="node.mouseAction('click', $event)" (dblclick)="node.mouseAction('dblClick', $event)"
+                        (contextmenu)="node.mouseAction('contextMenu', $event)" (treeDrop)="node.onDrop($event)"
+                        [treeAllowDrop]="node.allowDrop">
+                        <div class="node-alert" [ngStyle]="{'background-color':getColor(node.data)}"></div>
+                        <!-- <img class="e-list-img" src="https://tourmalineqa.althing.io/wwwroot/images/All%20FDC%20Icons%2047x47%2024.05.2018/Gas_Icon_47x47.svg" alt="e-list-img"> -->
+                        <img class="e-list-img" [src]="getIcon(node.data.EntityType)" alt="e-list-img">
+                        <span [class]="node.data.className + 'Index'"></span>
+                        <span class="nodeText" [class.title]="true">{{ node.data.EntityName }}</span>
+                    </div>
+                </div>
+
+                <!-- <tree-node-children [node]="node" [templates]="templates">
+                </tree-node-children> -->
+                <div [class.tree-children]="true" [class.tree-children-no-padding]="node.options.levelPadding"
+                    *treeAnimateOpen="
+                  node.isExpanded;
+                  speed:node.options.animateSpeed;
+                  acceleration:node.options.animateAcceleration;
+                  enabled:node.options.animateExpand">
+                    <tree-node-collection *ngIf="node.children" [nodes]="node.children" [templates]="templates"
+                        [treeModel]="node.treeModel">
+                    </tree-node-collection>
+                    <tree-loading-component [style.padding-left]="node.getNodePadding()" class="tree-node-loading"
+                        *ngIf="!node.children" [template]="templates.loadingTemplate" [node]="node"></tree-loading-component>
+                </div>
+
+
+
+                <tree-node-drop-slot [ngStyle]="{'height': slotheight}" [dropIndex]="node.index + 1" [node]="node.parent">
+                </tree-node-drop-slot>
+            </div>
+        </ng-template>
+        <ng-template #loadingTemplate>Loading, please hold....</ng-template>
+    </tree-root>
+</div>
+<br>
+<button (click)="dummy()"> Hide Info</button>
+<div [style.display]="toddle ? 'block':'none'" class="bpart2">
+    <p>Keys:</p>
+    down | up | left | right | space | enter
+    <p>Mouse:</p>
+    click to select | shift+click to select multi
+    <p>API:</p>
+    <button (click)="tree.treeModel.focusNextNode()">next node</button>
+    <button (click)="tree.treeModel.focusPreviousNode()">previous node</button>
+    <button (click)="tree.treeModel.focusDrillDown()">drill down</button>
+    <button (click)="tree.treeModel.focusDrillUp()">drill up</button>
+    <button (click)="customTemplateStringOptions.allowDrag = true">allowDrag</button>
+    <p></p>
+    <button [disabled]="!tree.treeModel.getFocusedNode()" (click)="tree.treeModel.getFocusedNode().toggleActivated()">
+        {{ tree.treeModel.getFocusedNode()?.isActive ? 'deactivate' : 'activate' }}
+    </button>
+    <button [disabled]="!tree.treeModel.getFocusedNode()" (click)="tree.treeModel.getFocusedNode().toggleExpanded()">
+        {{ tree.treeModel.getFocusedNode()?.isExpanded ? 'collapse' : 'expand' }}
+    </button>
+    <button [disabled]="!tree.treeModel.getFocusedNode()" (click)="tree.treeModel.getFocusedNode().blur()">
+        blur
+    </button>
+    <button (click)="addNode(tree)">
+        Add Node
+    </button>
+    <button (click)="activateSubSub(tree)">
+        Activate inner node
+    </button>
+    <button (click)="tree.treeModel.expandAll()">
+        Expand All
+    </button>
+    <button (click)="tree.treeModel.collapseAll()">
+        Collapse All
+    </button>
+    <button (click)="activeNodes(tree.treeModel)">
+        getActiveNodes()
+    </button>
+</div>
